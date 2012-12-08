@@ -1,8 +1,9 @@
 class Scorer
   def initialize *dice
+    @dice = dice
   end
 
   def score_as category
-    1
+    @dice.count(1)
   end
 end
