@@ -21,6 +21,7 @@ end
 
 describe Scorer do
   context "scoring ones" do
+    it { should score(2, 2, 3, 4, 5).in_category(:ones).as 0 }
     it { should score(1, 2, 3, 4, 5).in_category(:ones).as 1 }
     it { should score(1, 1, 3, 4, 5).in_category(:ones).as 2 }
     it { should score(5, 1, 4, 1, 1).in_category(:ones).as 3 }
@@ -51,5 +52,22 @@ describe Scorer do
   context "scoring sixes" do
     it { should score(1, 2, 3, 4, 6).in_category(:sixes).as 6 }
     it { should score(1, 2, 3, 6, 6).in_category(:sixes).as 12 }
+  end
+
+  context "scoring three of a kind" do
+    it { should score(1, 1, 3, 4, 5).in_category(:three_of_a_kind).as 0 }
+    it { should score(1, 1, 1, 4, 5).in_category(:three_of_a_kind).as 12 }
+    it { should score(5, 6, 6, 6, 6).in_category(:three_of_a_kind).as 29 }
+  end
+
+  context "scoring four of a kind" do
+    it { should score(1, 1, 1, 4, 5).in_category(:four_of_a_kind).as 0 }
+    it { should score(1, 1, 1, 1, 5).in_category(:four_of_a_kind).as 9 }
+    it { should score(6, 6, 6, 6, 6).in_category(:four_of_a_kind).as 30 }
+  end
+
+  context "scoring yahtzee" do
+    it { should score(1, 1, 3, 1, 1).in_category(:yahtzee).as 0 }
+    it { should score(6, 6, 6, 6, 6).in_category(:yahtzee).as 30 }
   end
 end

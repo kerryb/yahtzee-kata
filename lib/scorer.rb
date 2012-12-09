@@ -1,4 +1,5 @@
 require "number_count_scorer"
+require "of_a_kind_scorer"
 
 class Scorer
   def initialize *dice
@@ -13,6 +14,9 @@ class Scorer
                         when :fours then NumberCountScorer.new(4)
                         when :fives then NumberCountScorer.new(5)
                         when :sixes then NumberCountScorer.new(6)
+                        when :three_of_a_kind then OfAKindScorer.new(3)
+                        when :four_of_a_kind then OfAKindScorer.new(4)
+                        when :yahtzee then OfAKindScorer.new(5)
                         end
     category_scorer.score *@dice
   end
