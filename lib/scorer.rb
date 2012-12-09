@@ -1,8 +1,13 @@
 require "number_count_scorer"
 require "of_a_kind_scorer"
+require "full_house_scorer"
 
 class Scorer
+  class WrongNumberOfDice < RuntimeError; end
+  class InvalidCategory < RuntimeError; end
+
   def initialize *dice
+    raise WrongNumberOfDice unless dice.size == 5
     @dice = dice
   end
 
@@ -17,6 +22,7 @@ class Scorer
                         when :three_of_a_kind then OfAKindScorer.new(3)
                         when :four_of_a_kind then OfAKindScorer.new(4)
                         when :yahtzee then OfAKindScorer.new(5)
+                        else raise InvalidCategory
                         end
     category_scorer.score *@dice
   end

@@ -19,7 +19,7 @@ RSpec::Matchers.define :score do |*dice|
   end
 end
 
-describe Scorer do
+describe "Yahtzee scoring" do
   context "scoring ones" do
     it { should score(2, 2, 3, 4, 5).in_category(:ones).as 0 }
     it { should score(1, 2, 3, 4, 5).in_category(:ones).as 1 }
@@ -69,5 +69,17 @@ describe Scorer do
   context "scoring yahtzee" do
     it { should score(1, 1, 3, 1, 1).in_category(:yahtzee).as 0 }
     it { should score(6, 6, 6, 6, 6).in_category(:yahtzee).as 30 }
+  end
+
+  it "fails if given less than five dice" do
+    expect { Scorer.new(1, 2, 3, 4) }.to raise_error Scorer::WrongNumberOfDice
+  end
+
+  it "fails if given more than five dice" do
+    expect { Scorer.new(1, 2, 3, 4, 5, 6) }.to raise_error Scorer::WrongNumberOfDice
+  end
+
+  it "fails if given an invalid category" do
+    expect { Scorer.new(1, 2, 3, 4, 5).score_as(:foo) }.to raise_error Scorer::InvalidCategory
   end
 end
