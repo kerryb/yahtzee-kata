@@ -2,7 +2,8 @@ require "scorer"
 
 RSpec::Matchers.define :score do |*dice|
   match do |actual|
-    Scorer.new(*dice).score_as(@category) == @expected
+    @score = Scorer.new(*dice).score_as(@category)
+    @score == @expected
   end
 
   chain :in_category do |category|
@@ -13,8 +14,8 @@ RSpec::Matchers.define :score do |*dice|
     @expected = expected
   end
 
-  failure_message_for_should do |actual|
-    "expected #{dice.inspect} in category #{@category.inspect} to score #{@expected}, but got #{actual}"
+  failure_message_for_should do
+    "expected #{dice.inspect} in category #{@category.inspect} to score #{@expected}, but got #{@score}"
   end
 end
 
