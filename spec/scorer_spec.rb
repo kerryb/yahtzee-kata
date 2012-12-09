@@ -34,5 +34,10 @@ describe Scorer do
       StraightScorer.stub(:new).with(5, 40) { scorer }
       expect(Scorer.new(1, 2, 3, 4, 5).score_as(:high_straight)).to eq 42
     end
+
+    it "scores chance using a chance scorer" do
+      ChanceScorer.stub new: scorer
+      expect(Scorer.new(1, 2, 3, 4, 5).score_as(:chance)).to eq 42
+    end
   end
 end

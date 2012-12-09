@@ -2,6 +2,7 @@ require "number_count_scorer"
 require "of_a_kind_scorer"
 require "full_house_scorer"
 require "straight_scorer"
+require "chance_scorer"
 
 class Scorer
   class WrongNumberOfDice < RuntimeError; end
@@ -26,6 +27,7 @@ class Scorer
                         when :low_straight then StraightScorer.new(4, 30)
                         when :high_straight then StraightScorer.new(5, 40)
                         when :yahtzee then OfAKindScorer.new(5)
+                        when :chance then ChanceScorer.new
                         else raise InvalidCategory
                         end
     category_scorer.score *@dice

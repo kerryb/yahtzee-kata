@@ -90,6 +90,10 @@ describe "Yahtzee scoring" do
     it { should score(6, 6, 6, 6, 6).in_category(:yahtzee).as 30 }
   end
 
+  context "scoring chance" do
+    it { should score(1, 6, 6, 2, 4).in_category(:chance).as 19 }
+  end
+
   it "fails if given less than five dice" do
     expect { Scorer.new(1, 2, 3, 4) }.to raise_error Scorer::WrongNumberOfDice
   end
