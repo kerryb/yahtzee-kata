@@ -51,12 +51,12 @@ describe "Yahtzee scoring" do
 
   context "scoring sixes" do
     it { should score(1, 2, 3, 4, 6).in_category(:sixes).as 6 }
-    it { should score(1, 2, 3, 6, 6).in_category(:sixes).as 12 }
+    it { should score(1, 6, 3, 2, 6).in_category(:sixes).as 12 }
   end
 
   context "scoring three of a kind" do
     it { should score(1, 1, 3, 4, 5).in_category(:three_of_a_kind).as 0 }
-    it { should score(1, 1, 1, 4, 5).in_category(:three_of_a_kind).as 12 }
+    it { should score(1, 1, 4, 4, 1).in_category(:three_of_a_kind).as 11 }
     it { should score(5, 6, 6, 6, 6).in_category(:three_of_a_kind).as 29 }
   end
 
@@ -68,8 +68,21 @@ describe "Yahtzee scoring" do
 
   context "scoring full house" do
     it { should score(1, 1, 3, 1, 1).in_category(:full_house).as 0 }
-    it { should score(2, 2, 6, 6, 6).in_category(:full_house).as 25 }
+    it { should score(2, 6, 6, 2, 6).in_category(:full_house).as 25 }
     it { should score(2, 2, 2, 2, 2).in_category(:full_house).as 25 }
+  end
+
+  context "scoring a low straight" do
+    it { should score(1, 2, 4, 5, 6).in_category(:low_straight).as 0 }
+    it { should score(1, 2, 3, 4, 6).in_category(:low_straight).as 30 }
+    it { should score(3, 2, 6, 1, 4).in_category(:low_straight).as 30 }
+    it { should score(1, 2, 3, 4, 5).in_category(:low_straight).as 30 }
+  end
+
+  context "scoring a high straight" do
+    it { should score(1, 2, 4, 5, 6).in_category(:high_straight).as 0 }
+    it { should score(1, 2, 3, 5, 4).in_category(:high_straight).as 40 }
+    it { should score(3, 2, 6, 5, 4).in_category(:high_straight).as 40 }
   end
 
   context "scoring yahtzee" do

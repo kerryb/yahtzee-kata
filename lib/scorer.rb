@@ -1,6 +1,7 @@
 require "number_count_scorer"
 require "of_a_kind_scorer"
 require "full_house_scorer"
+require "straight_scorer"
 
 class Scorer
   class WrongNumberOfDice < RuntimeError; end
@@ -22,6 +23,8 @@ class Scorer
                         when :three_of_a_kind then OfAKindScorer.new(3)
                         when :four_of_a_kind then OfAKindScorer.new(4)
                         when :full_house then FullHouseScorer.new
+                        when :low_straight then StraightScorer.new(4, 30)
+                        when :high_straight then StraightScorer.new(5, 40)
                         when :yahtzee then OfAKindScorer.new(5)
                         else raise InvalidCategory
                         end
