@@ -19,5 +19,10 @@ describe Scorer do
         expect(Scorer.new(1, 2, 3, 4, 5).score_as(category)).to eq 42
       end
     end
+
+    it "scores full house using a full house scorer" do
+      FullHouseScorer.stub new: scorer
+      expect(Scorer.new(1, 2, 3, 4, 5).score_as(:full_house)).to eq 42
+    end
   end
 end

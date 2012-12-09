@@ -21,6 +21,7 @@ class Scorer
                         when :sixes then NumberCountScorer.new(6)
                         when :three_of_a_kind then OfAKindScorer.new(3)
                         when :four_of_a_kind then OfAKindScorer.new(4)
+                        when :full_house then FullHouseScorer.new
                         when :yahtzee then OfAKindScorer.new(5)
                         else raise InvalidCategory
                         end

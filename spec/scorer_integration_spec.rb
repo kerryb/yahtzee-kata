@@ -66,6 +66,12 @@ describe "Yahtzee scoring" do
     it { should score(6, 6, 6, 6, 6).in_category(:four_of_a_kind).as 30 }
   end
 
+  context "scoring full house" do
+    it { should score(1, 1, 3, 1, 1).in_category(:full_house).as 0 }
+    it { should score(2, 2, 6, 6, 6).in_category(:full_house).as 25 }
+    it { should score(2, 2, 2, 2, 2).in_category(:full_house).as 25 }
+  end
+
   context "scoring yahtzee" do
     it { should score(1, 1, 3, 1, 1).in_category(:yahtzee).as 0 }
     it { should score(6, 6, 6, 6, 6).in_category(:yahtzee).as 30 }
