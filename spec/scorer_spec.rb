@@ -14,7 +14,7 @@ describe Scorer do
     end
 
     {three_of_a_kind: 3, four_of_a_kind: 4, yahtzee: 5}.each do |category, number|
-      it "scores #{category.to_s.sub "_", " "} using an of-a-kind scorer" do
+      it "scores #{category} using an of-a-kind scorer" do
         OfAKindScorer.stub(:new).with(number) { scorer }
         expect(Scorer.new(1, 2, 3, 4, 5).score_as(category)).to eq 42
       end

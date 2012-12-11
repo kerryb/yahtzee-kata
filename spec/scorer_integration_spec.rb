@@ -14,6 +14,10 @@ RSpec::Matchers.define :score do |*dice|
     @expected = expected
   end
 
+  description do
+    "score #{dice.inspect} in category #{@category.inspect} as #{@expected}"
+  end
+
   failure_message_for_should do
     "expected #{dice.inspect} in category #{@category.inspect} to score #{@expected}, but got #{@score}"
   end
